@@ -1,36 +1,52 @@
-import { readFileSync, writeFileSync } from "fs"
-import { execSync } from "child_process"
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
+import os from "node:os"
+import path from "node:path"
 
-export const stateFilePath = "~/.local/share/sentientos/state.json"
+export const appDataDirectory = path.join(os.homedir(), ".local", "share", "sentientos")
+export const whatsappDataDirectory = path.join(appDataDirectory, "whatsapp")
+export const whatsappCycleDirectory = path.join(whatsappDataDirectory, "cycle")
+export const stateFilePath = path.join(appDataDirectory, "state.json")
+export const latestWhatsappCycleFilePath = path.join(whatsappCycleDirectory, "latest.json")
 
-export function setInitialState(){
-    execSync()
+export interface WhatsappState {
+    initialized: boolean
+    lastProcessedRowId: number | null
+    lastProcessedAt: string | null
 }
 
-export function updateWhatsappRowId(rowId: number){
-    const data = readFileSync(stateFilePath)
-    const config = JSON.parse(data)
-    if(!config.whatsapp){
-        config.whatsapp = {}
+export interface AppState {
+    whatsapp: WhatsappState
+}
+
+function createInitialState(): AppState {
+    return {
+        whatsapp: {
+            initialized: false,
+            lastProcessedRowId: null,
+            lastProcessedAt: null
+        }
     }
-    config.whatsapp.lastProcessedWaRowId = rowId
-    writeFileSync(stateFilePath, JSON.stringify(config, null, 2), "utf8")
-    console.log("Successfully saved lastProcessedWaRowId to state.")
 }
 
-export function updateWhatsappTime(time: string){
-    const data = readFileSync(stateFilePath)
-    const config = JSON.parse(data)
-    if(!config.whatsapp){
-        config.whatsapp = {}
+export function ensureAppData() {
+    mkdirSync(appDataDirectory, { recursive: true })
+    mkdirSync(whatsappDataDirectory, { recursive: true })
+    mkdirSync(whatsappCycleDirectory, { recursive: true })
+
+    if (!existsSync(stateFilePath)) {
+        saveState(createInitialState())
     }
-    config.whatsapp.lastProcessedWaTime = time
-    writeFileSync(stateFilePath, JSON.stringify(config, null, 2), "utf8")
-    console.log("Successfully saved lastProcessedWaTime to state.")
 }
 
-export function initialStateSetup(){
-    execSync("mkdir -p ~/.local/share/sentientos/state.json")
-    execSync("mkdir -p ~/.local/share/sentientos/cycle/whatsapp.json")
-    execSync("mkdir -p ~/.local/share/sentientos/AGENTS.md")
+export function loadState(): AppState {
+    const data = readFileSync(stateFilePath, "utf8")
+    return JSON.parse(data) as AppState
+}
+
+export function saveState(state: AppState) {
+    writeFileSync(stateFilePath, JSON.stringify(state, null, 2), "utf8")
+}
+
+export function saveWhatsappCycle(cycle: unknown) {
+    writeFileSync(latestWhatsappCycleFilePath, JSON.stringify(cycle, null, 2), "utf8")
 }

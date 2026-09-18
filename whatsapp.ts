@@ -1,41 +1,48 @@
 import Database from "better-sqlite3"
-import os from "os"
-import path from "path"
+import os from "node:os"
+import path from "node:path"
 
-// open wacli.db in read only mode. 
-// this is stored at ~/.local/state/wacli/
-// which contains: HEARTBEAT LOCK session.db wacli.db wacli.db-shm wacli.db-wal
+import type { WhatsappState } from "./state.js"
 
-function getWhatsappMessagesSince() {
-
-    // forming dbPath and creating a db using better-sqlite3
-    const dbPath = path.join(os.homedir(), ".local", "state", "wacli", "wacli.db")
-    const db = new Database(dbPath, { readonly: true })
-
-    // forming midnight today unix timestamp
-    const midnightToday = new Date()
-    midnightToday.setHours(0, 0, 0, 0)
-    const unixTime = Math.floor(midnightToday.getTime() / 1000)
-
-    // running sql command
-    const query = db.prepare(`
-        SELECT rowid, chat_jid, chat_name, msg_id, sender_jid, sender_name, ts, from_me, text, display_text
-        FROM messages
-        WHERE ts >= ?
-        AND deleted_at IS NULL
-        ORDER BY ts ASC    
-    `)
-
-    const messages = query.all(unixTime)
-    db.close()
-
-    // normalize messages[] by passing every item in normalizeMessage() fn
-    const normalizedMessages = messages.map(message => normalizeMessage(message))
-
-    return normalizedMessages
+interface WhatsappMessageRow {
+    rowid: number
+    chat_jid: string
+    chat_name: string | null
+    sender_jid: string | null
+    sender_name: string | null
+    ts: number
+    from_me: number
+    text: string | null
+    display_text: string | null
 }
 
-function normalizeMessage(message) {
+interface NormalizedWhatsappMessage {
+    rowId: number
+    chatId: string
+    chatName: string | null
+    senderId: string | null
+    senderName: string | null
+    timestamp: number
+    fromMe: boolean
+    content: string
+}
+
+export interface FormattedWhatsappChat {
+    chatId: string
+    chatName: string
+    transcript: string
+}
+
+export interface WhatsappCycleBatch {
+    cycleUpperBoundRowId: number | null
+    chats: FormattedWhatsappChat[]
+}
+
+interface MaxRowIdResult {
+    cycleUpperBoundRowId: number | null
+}
+
+function normalizeMessage(message: WhatsappMessageRow): NormalizedWhatsappMessage {
     return {
         rowId: message.rowid,
         chatId: message.chat_jid,
@@ -48,44 +55,44 @@ function normalizeMessage(message) {
     }
 }
 
-function groupByChatId(messages) {
-    return Object.groupBy(messages, (message) => message.chatId);
+function formatMessageTimestamp(timestamp: number) {
+    const date = new Date(timestamp * 1000)
+    const pad = (value: number) => String(value).padStart(2, "0")
+
+    const offsetMinutes = -date.getTimezoneOffset()
+    const offsetSign = offsetMinutes >= 0 ? "+" : "-"
+    const absoluteOffsetMinutes = Math.abs(offsetMinutes)
+    const offsetHours = Math.floor(absoluteOffsetMinutes / 60)
+    const offsetRemainingMinutes = absoluteOffsetMinutes % 60
+
+    const localDate = `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`
+    const localTime = `${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`
+    const offset = `${offsetSign}${pad(offsetHours)}:${pad(offsetRemainingMinutes)}`
+
+    return `${localDate} ${localTime} ${offset}`
 }
 
-export function getFormattedWhatsappChats() {
-    // get the normalized messages
-    const messages = getWhatsappMessagesSince()
+function groupByChatId(messages: NormalizedWhatsappMessage[]) {
+    const groupedMessages = new Map<string, NormalizedWhatsappMessage[]>()
 
-    const lastProcessedWaRowId = messages[messages.length - 1].rowId
+    for (const message of messages) {
+        const chatMessages = groupedMessages.get(message.chatId) ?? []
+        chatMessages.push(message)
+        groupedMessages.set(message.chatId, chatMessages)
+    }
 
-    // group messages by chat id
-    // Object.entries returns an array of arrays where each inner array[0] will be the chatId and index[1] will be the array of all messages in this chat
-    // eg: [
-    //       [ '120363297755465503@g.us', [ [Object], [Object] ] ],
-    //       [ '120363248684532461@newsletter', [ [Object] ] ],
-    //     ]
-    const groupedMessages = Object.entries(groupByChatId(messages))
+    return groupedMessages
+}
 
-    // print it in the console
-    // for (const [chatId, messages] of groupedMessages) {
-    //     const chatName = messages[messages.length - 1].chatName ?? "Unknown Chat"
-    //     console.log(`Messages in Chat: ${chatName} (${chatId})\n`)
+function formatChats(messages: NormalizedWhatsappMessage[]): FormattedWhatsappChat[] {
+    return Array.from(groupByChatId(messages), ([chatId, chatMessages]) => {
+        const latestMessage = chatMessages[chatMessages.length - 1]
+        const chatName = latestMessage?.chatName ?? "Unknown Chat"
 
-    //     for (const message of messages) {
-    //         const sender = message.fromMe ? "Me" : (message.senderName ?? message.chatName ?? "Unknown")
-    //         console.log(`[[${sender}]]: ${message.content}`)
-    //     }
-
-    //     console.log("\n==============\n")
-    // }
-
-    return groupedMessages.map(([chatId, messages]) => {
-
-        const chatName = messages[messages.length - 1].chatName ?? "Unknown Chat"
-
-        const transcript = messages?.map((message) => {
+        const transcript = chatMessages.map((message) => {
             const sender = message.fromMe ? "Me" : (message.senderName ?? message.chatName ?? "Unknown")
-            return `[[${sender}]]: ${message.content}`
+            const timestamp = formatMessageTimestamp(message.timestamp)
+            return `[[${sender} | ${timestamp}]]: ${message.content}`
         }).join("\n")
 
         return {
@@ -96,5 +103,53 @@ export function getFormattedWhatsappChats() {
     })
 }
 
-// const chats = getFormattedWhatsappChats()
-// console.log(chats)
+export function getWhatsappCycle(state: WhatsappState): WhatsappCycleBatch {
+    const dbPath = path.join(os.homedir(), ".local", "state", "wacli", "wacli.db")
+    const db = new Database(dbPath, { readonly: true })
+
+    try {
+        const { cycleUpperBoundRowId } = db.prepare(`
+            SELECT MAX(rowid) AS cycleUpperBoundRowId
+            FROM messages
+        `).get() as MaxRowIdResult
+
+        let messageRows: WhatsappMessageRow[] = []
+
+        if (cycleUpperBoundRowId !== null) {
+            if (!state.initialized) {
+                const midnightToday = new Date()
+                midnightToday.setHours(0, 0, 0, 0)
+                const midnightUnixTime = Math.floor(midnightToday.getTime() / 1000)
+
+                messageRows = db.prepare(`
+                    SELECT rowid, chat_jid, chat_name, sender_jid, sender_name, ts, from_me, text, display_text
+                    FROM messages
+                    WHERE ts >= ?
+                    AND rowid <= ?
+                    AND deleted_at IS NULL
+                    ORDER BY ts ASC, rowid ASC
+                `).all(midnightUnixTime, cycleUpperBoundRowId) as WhatsappMessageRow[]
+            } else {
+                const previousProcessedRowId = state.lastProcessedRowId ?? 0
+
+                messageRows = db.prepare(`
+                    SELECT rowid, chat_jid, chat_name, sender_jid, sender_name, ts, from_me, text, display_text
+                    FROM messages
+                    WHERE rowid > ?
+                    AND rowid <= ?
+                    AND deleted_at IS NULL
+                    ORDER BY ts ASC, rowid ASC
+                `).all(previousProcessedRowId, cycleUpperBoundRowId) as WhatsappMessageRow[]
+            }
+        }
+
+        const messages = messageRows.map(normalizeMessage)
+
+        return {
+            cycleUpperBoundRowId,
+            chats: formatChats(messages)
+        }
+    } finally {
+        db.close()
+    }
+}

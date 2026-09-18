@@ -1,110 +1,17 @@
-import { execSync, spawn } from "child_process"
-import ollama, { Message } from "ollama"
-import { getFormattedWhatsappChats } from "./whatsapp";
+import ollama from "ollama"
+import type { Message } from "ollama"
 import { z } from "zod"
 
-import { initialStateSetup } from "./state.ts"
+import type { WhatsappGemmaItem } from "./processed.js"
+import { setup } from "./setup.js"
+import { loadState, saveState, saveWhatsappCycle } from "./state.js"
+import { getWhatsappCycle } from "./whatsapp.js"
 
 const LocalTriageSchema = z.object({
     decision: z.enum(["keep", "junk", "sensitive"]),
     reason: z.string(),
     summary: z.string().nullable()
 })
-
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
-
-function isOllamaInstalled() {
-    try {
-        execSync("ollama --version", { stdio: "ignore" })
-        return true
-    } catch (error) {
-        return false
-    }
-}
-
-function checkOllamaVersion() {
-    try {
-        const version = execSync("ollama --version")
-        console.log("Ollama version: ", version.toString())
-    } catch (error) {
-        console.log("Error in getOllamaVersion - ", error)
-    }
-}
-
-function installOllama() {
-    try {
-        if (!isOllamaInstalled()) {
-            console.log("Ollama is not installed - Beginning installation...")
-            execSync("omarchy pkg add ollama", { stdio: "inherit" })
-
-            if (isOllamaInstalled()) {
-                console.log("Congrats - Ollama installed successfully!")
-                checkOllamaVersion()
-            } else {
-                throw new Error("omarchy pkg add ollama command ran but isOmarchyInstalled returns false?!? ")
-            }
-
-        } else {
-            console.log("Ollama is already installed in your system...")
-            checkOllamaVersion()
-        }
-    } catch (error) {
-        console.error("Error in installOllama - ", error)
-    }
-}
-
-function isOllamaRunning() {
-    try {
-        execSync("ollama ps", { stdio: "ignore" })
-        return true
-    } catch (error) {
-        return false
-    }
-}
-
-function serveOllama() {
-    try {
-        const ollama = spawn("ollama", ["serve"], { detached: true })
-        ollama.unref()
-    } catch (error) {
-        console.error("Error in serveOllama - ", error)
-    }
-}
-
-function isGemmaInstalled() {
-    try {
-        execSync("ollama list | grep gemma4:e2b", { stdio: "ignore" })
-        console.log("Gemma4:E2B is installed!")
-        return true
-    } catch (error) {
-        console.log("Gemma4:E2B not installed.")
-        return false
-    }
-}
-
-function installGemmaModel() {
-    try {
-        console.log("Installing Gemma4:E2B model on Ollama without launching it")
-        execSync("ollama pull gemma4:e2b", { stdio: "inherit" })
-        const output = isGemmaInstalled()
-        if (output) return true
-        else return false
-    } catch (error) {
-        console.error("Error in installGemmaModel - ", error)
-    }
-}
-
-// runs: ollama run gemma4:e2b with stdio: inherit - running gemma in the same terminal interactively (not needed)
-function runGemmaModel() {
-    try {
-        console.log("Running Gemma4:E2B...")
-        execSync("ollama run gemma4:e2b", { stdio: "inherit" })
-    } catch (error) {
-        console.error("Error in runGemmaModel - ", error)
-    }
-}
-
 
 async function askGemma(messages: Message[]) {
     const response = await ollama.chat({
@@ -126,24 +33,13 @@ async function askGemma(messages: Message[]) {
     )
 }
 
-async function setup() {
-    console.log("Setting up Ollama and Gemma4:E2B...")
-    installOllama()
-    if (!isOllamaRunning()) {
-        console.log("Starting Ollama...")
-        serveOllama()
-    } else console.log("Ollama is already running locally...")
-    // wait for ollama server to start
-    await sleep(2000)
-    if (!isGemmaInstalled()) {
-        console.log("Gemma is not installed in this machine...")
-        installGemmaModel()
-    }
+async function main() {
+    await setup()
 
-    // initialize local files for storing app state
-    initialStateSetup()
+    const state = loadState()
 
-    const wachats = getFormattedWhatsappChats()
+    const { cycleUpperBoundRowId, chats } = getWhatsappCycle(state.whatsapp)
+    const retrievedAt = new Date().toISOString()
 
     // ollama server is running (serveOllama) and Gemma is also installed by now...
     console.log("Starting convo with gemma...")
@@ -159,11 +55,16 @@ async function setup() {
         - chatName
         - transcript (this contains a part of the conversation that happened in the chat)
         
-        Inside the transcript, each sender is written like: 
-        [[Sender Name]]: message
+        Inside the transcript, each message is written like:
+        [[Sender Name | 2026-09-18 09:32:15 +05:30]]: message
         
         Messages sent by the user are marked:
-        [[Me]]
+        [[Me | timestamp]]
+
+        Every WhatsApp message includes the local timestamp at which it was sent.
+        Interpret relative dates and times such as today, tomorrow, yesterday, and next Friday relative to that message timestamp.
+        When the timestamp and context support it, convert relative temporal information into an explicit absolute date in KEEP summaries while preserving the originally stated time.
+        Try to not leave a relative date such as "today", "tomorrow" when it can be safely converted into an absolute calendar date. But incase when the relative expression cannot be resolved safely from the message timestamp and context, then you can keep the relative date instead of inventing some absolute date just for the sake of it.
 
         You are the local privacy and compression layer.
 
@@ -171,9 +72,9 @@ async function setup() {
 
         Rules:
         - Mark JUNK only when the content is clearly meaningless or low-value noise.
-        - Mark SENSITIVE only when the entire content/transcript contains sensitive date, meaning the data that should not be retained or sent to a cloud model. You should mark SENSITIVE only when the useful meaning of the chat cannot be retained
+        - Mark SENSITIVE only when the entire content/transcript contains sensitive data, meaning the data that should not be retained or sent to a cloud model. You should mark SENSITIVE only when the useful meaning of the chat cannot be retained
         without retaining the sensitive information.
-        - If there is any reasonable chance the content may be useful later, mark KEEP.
+        - If a part of the transcript could be useful later, mark KEEP. If you clearly see that there is absolutely no meaningful content conveyed by the transcript, mark as JUNK.
         - For KEEP, write a short factual summary preserving important details.
         - Do not infer missing context, identities, relationships, ownership, intentions, or facts that are not explicitly supported by the transcript.
         - Never include sensitive personal data in either the summary OR the reason.
@@ -184,15 +85,16 @@ async function setup() {
         Additional rules for KEEP summaries:
         - Preserve ALL explicitly stated actionable or time-sensitive information.
         - Especially preserve exact: dates, times, deadlines, commitments, event names, locations, amounts, requirements, actionable statements, conditions and links unless they are sensitive.
-        - Do not replace an exact actionable detail with some shortened or vague phase
+        - Do not replace an exact actionable detail with some shortened or vague phrase
         - When several independent useful facts exist, preserve each one. Compression should remove unnecessary wording, not useful facts.
+        - If there are uncertain or conflicting claims, preserve them.
         `
     }
 
-    const gemmaOutput = []
+    const gemmaOutput: WhatsappGemmaItem[] = []
 
     let index = -1
-    for (const chat of wachats) {
+    for (const chat of chats) {
         console.log(`Processing chat ${++index} - ${chat.chatName}`)
 
         const messages = [
@@ -225,7 +127,28 @@ async function setup() {
     console.log("========= GEMMA FINAL OUTPUT: ==========")
     console.log(gemmaOutput)
 
-    const lastProcessedWaTime = new Date().toISOString()
+    const processedAt = new Date().toISOString()
+
+    saveWhatsappCycle({
+        source: "whatsapp",
+        retrievedAt,
+        processedAt,
+        previousProcessedRowId: state.whatsapp.lastProcessedRowId,
+        throughRowId: cycleUpperBoundRowId,
+        items: gemmaOutput
+    })
+
+    saveState({
+        ...state,
+        whatsapp: {
+            initialized: true,
+            lastProcessedRowId: cycleUpperBoundRowId,
+            lastProcessedAt: processedAt
+        }
+    })
 }
 
-setup()
+main().catch((error) => {
+    console.error("WhatsApp processing cycle failed:", error)
+    process.exitCode = 1
+})
