@@ -1,15 +1,14 @@
 import ollama from "ollama"
 import type { Message } from "ollama"
 import { z } from "zod"
-
 import type { WhatsappGemmaItem } from "./processed.js"
 import { setup } from "./setup.js"
 import { loadState, saveState, saveWhatsappCycle } from "./state.js"
 import { getWhatsappCycle } from "./whatsapp.js"
+import { runIntelligenceCycle } from "./intelligence.js"
 
 const LocalTriageSchema = z.object({
     decision: z.enum(["keep", "junk", "sensitive"]),
-    reason: z.string(),
     summary: z.string().nullable()
 })
 
@@ -38,7 +37,13 @@ async function main() {
 
     const state = loadState()
 
-    const { cycleUpperBoundRowId, chats } = getWhatsappCycle(state.whatsapp)
+    // const { cycleUpperBoundRowId, chats } = getWhatsappCycle(state.whatsapp)
+    const { cycleUpperBoundRowId, chats } = getWhatsappCycle({
+        initialized: false,
+        lastProcessedRowId: null,
+        lastProcessedAt: null
+    })
+
     const retrievedAt = new Date().toISOString()
 
     // ollama server is running (serveOllama) and Gemma is also installed by now...
@@ -64,7 +69,7 @@ async function main() {
         Every WhatsApp message includes the local timestamp at which it was sent.
         Interpret relative dates and times such as today, tomorrow, yesterday, and next Friday relative to that message timestamp.
         When the timestamp and context support it, convert relative temporal information into an explicit absolute date in KEEP summaries while preserving the originally stated time.
-        Try to not leave a relative date such as "today", "tomorrow" when it can be safely converted into an absolute calendar date. But incase when the relative expression cannot be resolved safely from the message timestamp and context, then you can keep the relative date instead of inventing some absolute date just for the sake of it.
+        If a relative date such as "today", "tomorrow" or such expressions written in different languages can be safely converted into an absolute calendar date, then you MUST convert it. Take help of the timestamp and surrounding conversation. But incase when it is unsafe, then you can keep the relative date instead of inventing some absolute date.
 
         You are the local privacy and compression layer.
 
@@ -77,14 +82,14 @@ async function main() {
         - If a part of the transcript could be useful later, mark KEEP. If you clearly see that there is absolutely no meaningful content conveyed by the transcript, mark as JUNK.
         - For KEEP, write a short factual summary preserving important details.
         - Do not infer missing context, identities, relationships, ownership, intentions, or facts that are not explicitly supported by the transcript.
-        - Never include sensitive personal data in either the summary OR the reason.
+        - Never include sensitive personal data in the summary.
         - Sensitive data includes phone numbers, passwords, PINs, OTPs, CVVs, card numbers, bank account details, government ID numbers, authentication tokens, and similar credentials/private identifiers.
-        - If a chat contains both useful information and sensitive information: KEEP the chat, preserve the useful information, and completely omit the sensitive details from the summary and reason. You can signal what that sensitive information was about in the summary if it would be good to state it to add to the context in the summary but dont mention the actual sensitive values.
+        - If a chat contains both useful information and sensitive information: KEEP the chat, preserve the useful information, and completely omit the sensitive details from the summary. You can signal what that sensitive information was about in the summary if it would be good to state it to add to the context in the summary but dont mention the actual sensitive values.
         - Do not replace sensitive information with partially visible versions. Simply omit it.
 
         Additional rules for KEEP summaries:
         - Preserve ALL explicitly stated actionable or time-sensitive information.
-        - Especially preserve exact: dates, times, deadlines, commitments, event names, locations, amounts, requirements, actionable statements, conditions and links unless they are sensitive.
+        - Especially preserve exact: dates, times, deadlines, commitments, event names, locations, amounts, requirements, actionable statements, conditions and links (any external links including youtube, reddit, x.com, ...) unless they are sensitive.
         - Do not replace an exact actionable detail with some shortened or vague phrase
         - When several independent useful facts exist, preserve each one. Compression should remove unnecessary wording, not useful facts.
         - If there are uncertain or conflicting claims, preserve them.
@@ -119,13 +124,12 @@ async function main() {
             chatId: chat.chatId,
             chatName: chat.chatName,
             gemmaDecision: response.decision,
-            gemmaReason: response.reason,
             gemmaSummary: response.summary
         })
     }
 
-    console.log("========= GEMMA FINAL OUTPUT: ==========")
-    console.log(gemmaOutput)
+    // console.log("========= GEMMA FINAL OUTPUT: ==========")
+    // console.log(gemmaOutput)
 
     const processedAt = new Date().toISOString()
 
@@ -135,9 +139,12 @@ async function main() {
         processedAt,
         previousProcessedRowId: state.whatsapp.lastProcessedRowId,
         throughRowId: cycleUpperBoundRowId,
-        items: gemmaOutput
+        items: gemmaOutput,
+        formattedChats: chats
     })
 
+    // Gemma Whatsapp processing succeeded.
+    // Commit the Whatsapp checkpoint first to the state
     saveState({
         ...state,
         whatsapp: {
@@ -146,6 +153,11 @@ async function main() {
             lastProcessedAt: processedAt
         }
     })
+
+    console.log("\nWhatsapp processing cycle complete.")
+
+    // Run intelligence cycle
+    await runIntelligenceCycle()
 }
 
 main().catch((error) => {

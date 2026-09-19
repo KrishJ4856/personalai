@@ -4,7 +4,6 @@ export interface WhatsappGemmaItem {
     chatId: string
     chatName: string
     gemmaDecision: GemmaDecision
-    gemmaReason: string
     gemmaSummary: string | null
 }
 

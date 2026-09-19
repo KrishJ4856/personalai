@@ -55,7 +55,7 @@ function isOllamaRunning() {
 
 function serveOllama() {
     try {
-        const ollama = spawn("ollama", ["serve"], { detached: true })
+        const ollama = spawn("ollama", ["serve"], { detached: true, stdio: "ignore" })
         ollama.unref()
     } catch (error) {
         console.error("Error in serveOllama - ", error)

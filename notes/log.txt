@@ -1,0 +1,510 @@
+sentientos main  ? ❯ tsx index.ts
+Setting up Ollama and Gemma4:E2B...
+Ollama is already installed in your system...
+Ollama version:  Warning: could not connect to a running Ollama instance
+Warning: client version is 0.33.3
+
+Starting Ollama...
+Gemma4:E2B is installed!
+Starting convo with gemma...
+Processing chat 0 - In-House Influencers Batch 16
+Finished in 236.6s
+Processing chat 1 - This is Last Time SG
+Finished in 113.4s
+Processing chat 2 - Sadhguru
+Finished in 50.7s
+Processing chat 3 - BCA 2024 Section A
+Finished in 80.7s
+Processing chat 4 - Sharanam Smaranam Volunteers 🌸
+Finished in 69.5s
+Processing chat 5 - Sharanam Smaranam B2 🌸
+Finished in 58.4s
+Processing chat 6 - Ahona
+Finished in 179.2s
+Processing chat 7 - Papa
+Finished in 48.5s
+Processing chat 8 - IEM BCA SEC A
+Finished in 140.0s
+Processing chat 9 - 🌞Isha West Bengal #2🌙
+Finished in 78.5s
+Processing chat 10 - Mumbai City 🏙️
+Finished in 95.4s
+Processing chat 11 - 🌄  KOLKATA EAST All Volunteers 🌄
+Finished in 102.7s
+Processing chat 12 - DUMDUM in-person(offline) volunteering
+Finished in 144.8s
+Processing chat 13 - Spencers Hypermarket
+Finished in 104.6s
+^C
+sentientos main  ? ✗ tsx intelligence.ts 
+◇ injected env (3) from .env
+RUNNING INTELLIGENCE.TS FILE!!!!!!!!!!!
+:::::::: original chats with transcript :::::::::::::
+[
+  {
+    chatId: '120363410794941881@g.us',
+    chatName: 'In-House Influencers Batch 16',
+    transcript: '[[Cdt. Sai Charith Kumar | 2026-09-18 00:23:39 +05:30]]: Reacted 😎 to Sent gif\n' +
+      '[[Nelocity Nayana | 2026-09-18 07:10:29 +05:30]]: Reacted 😎 to Sent gif\n' +
+      '[[Arun Pasula | 2026-09-18 07:33:03 +05:30]]: Reacted 😎 to Sent gif\n' +
+      '[[Renuka | 2026-09-18 07:58:54 +05:30]]: Reacted 😎 to Sent gif\n' +
+      '[[Vidya | 2026-09-18 08:52:25 +05:30]]: Reacted 😎 to Sent gif\n' +
+      '[[Dr.SARVAGNA | 2026-09-18 08:52:25 +05:30]]: Reacted 😎 to Sent gif\n' +
+      '[[Dhiman Enterprises Karnal | 2026-09-18 08:52:28 +05:30]]: Reacted 😎 to Sent gif\n' +
+      '[[Aayush 🧭 | 2026-09-18 09:08:31 +05:30]]: Reacted 😎 to Sent gif\n' +
+      '[[Himanshu | 2026-09-18 10:00:48 +05:30]]: Reacted 😎 to Sent gif\n' +
+      '[[Aastha Jha 🪷 | 2026-09-18 10:27:32 +05:30]]: Reacted 👍🏻 to > Do we need a laptop for this?\n' +
+      'Not compulsory, mobile is enough anna\n' +
+      '[[Sudha (KL) Naturally | 2026-09-18 10:48:06 +05:30]]: (message)\n' +
+      '[[Sudha (KL) Naturally | 2026-09-18 11:30:16 +05:30]]: (message)\n' +
+      '[[Anil Kumar Gattu | 2026-09-18 13:59:07 +05:30]]: 😎\n' +
+      '[[Anil Kumar Gattu | 2026-09-18 13:59:12 +05:30]]: 😎\n' +
+      '[[Anakha Suresh | 2026-09-18 13:59:58 +05:30]]: Reacted 😎 to Sent gif\n' +
+      '[[Hrishikesh Majumder | 2026-09-18 14:42:10 +05:30]]: (message)\n' +
+      '[[Sudhapalle | 2026-09-18 15:47:45 +05:30]]: (message)\n' +
+      '[[Sudhapalle | 2026-09-18 15:48:05 +05:30]]: (message)\n' +
+      '[[Jerin Kunjumon | 2026-09-18 16:46:26 +05:30]]: (message)\n' +
+      '[[Rebosepro | 2026-09-18 17:33:47 +05:30]]: (message)\n' +
+      '[[Rebosepro | 2026-09-18 17:35:21 +05:30]]: Namaskaram everyone. Since it is required to install the zoom app and waiting for updates , I offer my best wishes for this opportunity and to the organizers. Thanks!🪷🙏🏼\n' +
+      '[[Chandan Gaur | 2026-09-18 17:36:14 +05:30]]: Reacted 🙏 to Namaskaram everyone. Since it is required to install the zoom app and waiting for updates , I offer my best wishes for this opportunity and to the organizers. Thanks!🪷🙏🏼\n' +
+      '[[Sudhapalle | 2026-09-18 17:39:41 +05:30]]: Reacted 🙏🏻 to Namaskaram everyone. Since it is required to install the zoom app and waiting for updates , I offer my best wishes for this opportunity and to the organizers. Thanks!🪷🙏🏼\n' +
+      '[[Amit Swami | 2026-09-18 17:40:37 +05:30]]: Reacted 🙏 to Namaskaram everyone. Since it is required to install the zoom app and waiting for updates , I offer my best wishes for this opportunity and to the organizers. Thanks!🪷🙏🏼\n' +
+      '[[Anil Kumar Gattu | 2026-09-18 18:15:48 +05:30]]: I joined this group yesterday. Kindly post previous messages again if there is anything important we missed .\n' +
+      '[[Akshay | 2026-09-18 18:23:55 +05:30]]: (message)\n' +
+      '[[Meenakshi Sundaram | 2026-09-18 18:29:21 +05:30]]: Reacted 🙏🏼 to Namaskaram everyone. Since it is required to install the zoom app and waiting for updates , I offer my best wishes for this opportunity and to the organizers. Thanks!🪷🙏🏼\n' +
+      '[[Sudha (KL) Naturally | 2026-09-18 18:39:20 +05:30]]: Namaskaram!\n' +
+      '\n' +
+      "We are waiting for more volunteers to join, we'll post message tonight. Meanwhile you can check the description of the group for basic details \n" +
+      '\n' +
+      'Mentors \n' +
+      'IHI Team\n' +
+      '[[🐘 | 2026-09-18 18:45:45 +05:30]]: Reacted 👍🏻 to Namaskaram everyone. Since it is required to install the zoom app and waiting for updates , I offer my best wishes for this opportunity and to the organizers. Thanks!🪷🙏🏼\n' +
+      '[[PRUTHVI | 2026-09-18 19:02:28 +05:30]]: Namskaram I was IHI Team. I was thinking of creating a new email and ig account. Can I go ahead and do that or should I not ?\n' +
+      '[[Varsha Menon | 2026-09-18 19:03:08 +05:30]]: (message)\n' +
+      '[[🐘 | 2026-09-18 19:11:52 +05:30]]: Yes 👍\n' +
+      "[[Sudha (KL) Naturally | 2026-09-18 19:12:42 +05:30]]: We'll let you know all details during and after Sunday session akka 😊\n" +
+      '[[HEMANTA KAPAT | 2026-09-18 19:22:47 +05:30]]: (message)\n' +
+      '[[🐘 | 2026-09-18 19:35:11 +05:30]]: Reacted 🙏🏻 to > Namskaram I was IHI Team. I was thinking of creating a new email and ig account. Can I go ahead and do that or should I not ?\n' +
+      "We'll let you know all details during and after Sunday session akka 😊\n" +
+      '[[Kiran Priyadarshani | 2026-09-18 20:49:24 +05:30]]: (message)\n' +
+      '[[Kanta Gulati | 2026-09-18 21:09:12 +05:30]]: (message)'
+  },
+  {
+    chatId: '120363248684532461@newsletter',
+    chatName: 'This is Last Time SG',
+    transcript: '[[This is Last Time SG | 2026-09-18 08:15:30 +05:30]]: *Science of Fluttering During Aasanas and Kriyas* 🧘🏻🪷\n' +
+      '\n' +
+      'Questioner: In certain asanas, for example in Bhujangasana in the Surya Kriya series, or in the Sarvangasana series, as well as in Matsyasana, we do rapid breathing. Why so?\n' +
+      '\n' +
+      'Sadhguru: Wherever there is rapid breathing, there is an effort to turn a very physical process into an energy process. When there is an opportunity without risk, we are trying to use it. Kriyas have to be done with a certain care. Suppose your energies get activated without the right kind of preparation, while you are in the wrong posture, in the wrong attitude, in the wrong situation, your stomach is full or whatever else, what could be a great thing will turn into a disaster.\n' +
+      '\n' +
+      'It is like a pot of gold came down from above, but it fell on your head and killed you! If a rock broke off from a mountain, fell on your head, and you died, it is one thing. If a pot of gold came down from above, but instead of you catching it, it fell on your head and you died, it is a disaster! So, when we do asanas, only certain postures where it is safe to do that, we seek to transform them into Kriyas.'
+  },
+  {
+    chatId: '120363183420261859@newsletter',
+    chatName: 'Sadhguru',
+    transcript: '[[Sadhguru | 2026-09-18 09:33:57 +05:30]]: Sent image'
+  },
+  {
+    chatId: '120363318576347090@g.us',
+    chatName: 'BCA 2024 Section A',
+    transcript: '[[Rupam Bhattacharya | 2026-09-18 09:40:22 +05:30]]: Sent document\n' +
+      '[[Rupam Bhattacharya | 2026-09-18 09:40:23 +05:30]]: E Invitation Card from Government…Please fill up the following google form for security check positively.\n' +
+      '[[Rupam Bhattacharya | 2026-09-18 09:40:23 +05:30]]: All attendees of Seva First Innovation Challenge on 19th September 2026 are requested to fill up this Google form as a confirmation of the presence.  \n' +
+      '\n' +
+      'https://forms.gle/QCrL958oF165CMck8'
+  },
+  {
+    chatId: '120363315497765875@g.us',
+    chatName: 'Sharanam Smaranam Volunteers 🌸',
+    transcript: '[[Parth Deshmukh | 2026-09-18 12:10:26 +05:30]]: Have you watched Kriya Through Sound on Sadhguru Exclusive  Using sounds as a means for a profound inner transformation and ultimate liberation.\n' +
+      'https://sgapp.sng.link/Acxyc/cykj/r_5efec5c55a\n' +
+      '[[Parth Deshmukh | 2026-09-18 12:10:27 +05:30]]: Do watch it will give you a deeper understanding of Indian Classical Music and Sound as a kriya. 😊🙏🏻\n' +
+      '[[Ankur Rastogi | 2026-09-18 12:53:25 +05:30]]: Reacted 🙏 to Do watch it will give you a deeper understanding of Indian Classical Music and Sound as a kriya. 😊🙏🏻'
+  },
+  {
+    chatId: '120363337456364299@g.us',
+    chatName: 'Sharanam Smaranam B2 🌸',
+    transcript: '[[Parth Deshmukh | 2026-09-18 12:10:28 +05:30]]: Have you watched Kriya Through Sound on Sadhguru Exclusive  Using sounds as a means for a profound inner transformation and ultimate liberation.\n' +
+      'https://sgapp.sng.link/Acxyc/cykj/r_5efec5c55a\n' +
+      '[[Parth Deshmukh | 2026-09-18 12:10:29 +05:30]]: Do watch it will give you a deeper understanding of Indian Classical Music and Sound as a kriya. 😊🙏🏻'
+  },
+  {
+    chatId: '120363313805903097@g.us',
+    chatName: 'Ahona',
+    transcript: '[[Sudipta Halder | 2026-09-18 12:27:54 +05:30]]: *Namaskaram* 🙏\n' +
+      'We are glad to announce \n' +
+      '🌈 *4 Days Inner Engineering in-person Program in English at Uniworld City, Newtown*\n' +
+      '\n' +
+      '🔖 *Registration Link :*  \n' +
+      'https://Isha.co/ekolkata-ie\n' +
+      '\n' +
+      '☎️ *Enquiry :-* 8300053777 / 8300053222\n' +
+      '\n' +
+      ' *Venue* : _*Uniclub 1, Ground Floor, Uniworld City, Newtown AA 3, Kolkata - 700156*_\n' +
+      ' 📍https://maps.app.goo.gl/8Evbpx2uS8aWkP4TA\n' +
+      '\n' +
+      "- *Participants' Experience:*\thttps://share.iec.ishayoga.eu/Yk7tIj\n" +
+      '\n' +
+      '- *Program Benefits:* \thttps://isha.sadhguru.org/yoga/yoga-articles-meditation/benefits-meditation-shambhavi-mahamudra-sadhguru/\n' +
+      '\n' +
+      '- *Harvard & Rutgers University Research:* \thttps://share.google/a2isZVmyQz1TiBfy4\n' +
+      '\n' +
+      '✨ You can share this wonderful opportunity with your friends and family \n' +
+      '\n' +
+      '*In Love, Light & Laughter*\n' +
+      'Isha Volunteers\n' +
+      '[[Sudipta Halder | 2026-09-18 12:28:23 +05:30]]: - 📱*Please share it as your WhatsApp status* 🙏🙏 🙏 \n' +
+      '\n' +
+      '- 🏬 *_And also share it in your housing complex whatsapp group_* 🙏🙏🙏\n' +
+      '[[Ummang | 2026-09-18 14:23:24 +05:30]]: Reacted 🙏🏽 to > Sent image\n' +
+      '- 📱*Please share it as your WhatsApp status* 🙏🙏 🙏 \n' +
+      '\n' +
+      '- 🏬 *_And also share it in your housing complex whatsapp group_* 🙏🙏🙏\n' +
+      '[[Ahona | 2026-09-18 17:10:50 +05:30]]: Name : Nishant Kumar Agarwal\n' +
+      '\n' +
+      'Ph: +91 9830796827\n' +
+      '\n' +
+      'Wants to be added in WhatsApp Community\n' +
+      '[[Ahona | 2026-09-18 17:42:32 +05:30]]: Name : Debashish Paul\n' +
+      '\n' +
+      'Ph: +9198368 88105\n' +
+      '\n' +
+      'Wants to be added in WhatsApp Community\n' +
+      '[[Ahona | 2026-09-18 18:12:14 +05:30]]: Name : Shubhodip Chakravarty\n' +
+      '\n' +
+      'Ph: +91 9903895242\n' +
+      '\n' +
+      'Wants to do the volunteering over the weekend\n' +
+      '[[Ahona | 2026-09-18 18:16:44 +05:30]]: Name : N.R VENKATESWARAN\n' +
+      '\n' +
+      'Ph: +91 9830109300\n' +
+      '\n' +
+      'Wants to be added to the WhatsApp Community\n' +
+      '[[Ahona | 2026-09-18 18:19:38 +05:30]]: Name : Arun Kumar Dubey\n' +
+      '\n' +
+      'Ph: +91 9831151947\n' +
+      '\n' +
+      'Wants to be added to the WhatsApp Community\n' +
+      '[[Ahona | 2026-09-18 19:02:00 +05:30]]: Name : Akash Mondal\n' +
+      '\n' +
+      'Ph: +91 9830052688\n' +
+      '\n' +
+      'Wants to Volunteer\n' +
+      '[[Ahona | 2026-09-18 19:16:39 +05:30]]: Name : Ruchira Banerjee\n' +
+      '\n' +
+      'Ph: +91 9674059655\n' +
+      '\n' +
+      'Wants to Volunteer\n' +
+      '[[Ahona | 2026-09-18 19:17:42 +05:30]]: Name : Ruchira Banerjee\n' +
+      '\n' +
+      'Ph: +91 9674059655\n' +
+      '\n' +
+      'Also wants to be added into the WhatsApp group'
+  },
+  {
+    chatId: '919831192151@s.whatsapp.net',
+    chatName: 'Papa',
+    transcript: '[[Me | 2026-09-18 12:51:07 +05:30]]: Sent image\n' +
+      '[[Me | 2026-09-18 12:51:16 +05:30]]: Sent image\n' +
+      '[[Me | 2026-09-18 12:51:31 +05:30]]: Sent image'
+  },
+  {
+    chatId: '120363296757086815@g.us',
+    chatName: 'IEM BCA SEC A',
+    transcript: '[[Maulik Prasad | 2026-09-18 14:12:10 +05:30]]: Guys, shobai ke bole rakhlam. Cloud er assignment 3 likhe kalker moddhe submit korte hobe in the google classroom regardless of whether you have got it signed or not. Baaki sir boleche, he will mark it in the lab.\n' +
+      '[[Ahana Adhikary | 2026-09-18 14:15:26 +05:30]]: Reacted 👍🏻 to Guys, shobai ke bole rakhlam. Cloud er assignment 3 likhe kalker moddhe submit korte hobe in the google classroom regardless of whether you have got it signed or not. Baaki sir boleche, he will mark it in the lab.\n' +
+      '[[Kanyashree Paul | 2026-09-18 14:53:44 +05:30]]: Classroom e toh ajker date deoa\n' +
+      '[[Asad | 2026-09-18 14:53:59 +05:30]]: +1\n' +
+      '[[Maulik Prasad | 2026-09-18 14:54:34 +05:30]]: Bhai ami ki bolbo... sir nijei bollo je kalke obdi date extend koreche... ami sir ke abar text krechi..\n' +
+      '[[Kanyashree Paul | 2026-09-18 14:54:48 +05:30]]: Oke\n' +
+      '[[Maulik Prasad | 2026-09-18 14:54:53 +05:30]]: Hopefully, sir extend korenebe\n' +
+      '[[Maulik Prasad | 2026-09-18 14:55:01 +05:30]]: But ajke likhte toh chalu kr\n' +
+      '[[Kanyashree Paul | 2026-09-18 14:55:08 +05:30]]: > But ajke likhte toh chalu kr\n' +
+      'Sent sticker\n' +
+      '[[Kanyashree Paul | 2026-09-18 14:55:14 +05:30]]: Ki bisaal bisaal code\n' +
+      '[[Maulik Prasad | 2026-09-18 14:55:33 +05:30]]: Tai bole bolchi... lekh aaj theke... kalker moddhe shesh hbe\n' +
+      '[[Kanyashree Paul | 2026-09-18 14:56:33 +05:30]]: Sent sticker\n' +
+      '[[Maulik Prasad | 2026-09-18 14:58:33 +05:30]]: Sent sticker\n' +
+      '[[Kanyashree Paul | 2026-09-18 15:04:29 +05:30]]: Sent sticker\n' +
+      '[[Maulik Prasad | 2026-09-18 19:44:50 +05:30]]: Dekh change kore diyeche sir\n' +
+      '[[Kanyashree Paul | 2026-09-18 19:44:59 +05:30]]: Ha dekhlam\n' +
+      '[[Ahana Adhikary | 2026-09-18 19:44:59 +05:30]]: ha'
+  },
+  {
+    chatId: '120363163190633248@g.us',
+    chatName: '🌞Isha West Bengal #2🌙',
+    transcript: '[[Anjali Rao | 2026-09-18 14:18:30 +05:30]]: 🚨```Error: Practice running on autopilot``` ⚙️\n' +
+      '\n' +
+      'If this sounds like you, join us for *Shambhavi Mahamudra Kriya Deep Dive*, a dedicated session to explore insights designed to bring back focus, involvement, and intensity.  \n' +
+      '\n' +
+      '🗓️ Sunday, 20 September \n' +
+      '⏰ 11:30 AM (Approx. 90 mins)\n' +
+      '*Join here: isha.co/smk-login*\n' +
+      '\n' +
+      '_Empty stomach not required_\n' +
+      '\n' +
+      'NOTE: For those who wish to restart their practice, join us for the *Shambhavi Mahamudra Kriya Refresher session* on 27 September.'
+  },
+  {
+    chatId: '120363333621519995@g.us',
+    chatName: 'Mumbai City 🏙️',
+    transcript: '[[Pratyush | 2026-09-18 14:44:18 +05:30]]: https://youtu.be/opyx15-2h5k?si=QuSKL9AQRf-6Hoam\n' +
+      '[[𝘿𝙚𝙫𝙚𝙣𝙙𝙧𝙖 | 2026-09-18 20:52:18 +05:30]]: (message)\n' +
+      '[[Atishay Jain | 2026-09-18 20:53:08 +05:30]]: Pratyush ne sirf box ke paise diye\n' +
+      '[[Pratyush | 2026-09-18 20:53:51 +05:30]]: fr\n' +
+      '[[𝘿𝙚𝙫𝙚𝙣𝙙𝙧𝙖 | 2026-09-18 20:54:23 +05:30]]: Usney Sasta Box kharidne ke liye credit card diya tha...Maine mehnga box kharid liya\n' +
+      '[[Pratyush | 2026-09-18 20:54:42 +05:30]]: mai credit card use he nahi karta\n' +
+      '[[Pratyush | 2026-09-18 20:54:45 +05:30]]: :)\n' +
+      '[[Pratyush | 2026-09-18 20:54:47 +05:30]]: 😭\n' +
+      '[[𝘿𝙚𝙫𝙚𝙣𝙙𝙧𝙖 | 2026-09-18 20:55:23 +05:30]]: Meanwhile:- teen teen bank ke hai 😏\n' +
+      '[[Pratyush | 2026-09-18 20:56:15 +05:30]]: 😘'
+  },
+  {
+    chatId: '120363190669312595@g.us',
+    chatName: '🌄  KOLKATA EAST All Volunteers 🌄',
+    transcript: '[[Sudipta Halder | 2026-09-18 15:09:57 +05:30]]: *Namaskaram* 🙏\n' +
+      'We are glad to announce \n' +
+      '🌈 *4 Days Inner Engineering in-person Program in English at Uniworld City, Newtown*\n' +
+      '\n' +
+      '🔖 *Registration Link :*  \n' +
+      'https://Isha.co/ekolkata-ie\n' +
+      '\n' +
+      '☎️ *Enquiry :-* 8300053777 / 8300053222\n' +
+      '\n' +
+      ' *Venue* : _*Uniclub 1, Ground Floor, Uniworld City, Newtown AA 3, Kolkata - 700156*_\n' +
+      ' 📍https://maps.app.goo.gl/8Evbpx2uS8aWkP4TA\n' +
+      '\n' +
+      "- *Participants' Experience:*\thttps://share.iec.ishayoga.eu/Yk7tIj\n" +
+      '\n' +
+      '- *Program Benefits:* \thttps://isha.sadhguru.org/yoga/yoga-articles-meditation/benefits-meditation-shambhavi-mahamudra-sadhguru/\n' +
+      '\n' +
+      '- *Harvard & Rutgers University Research:* \thttps://share.google/a2isZVmyQz1TiBfy4\n' +
+      '\n' +
+      '✨ You can share this wonderful opportunity with your friends and family \n' +
+      '\n' +
+      '*In Love, Light & Laughter*\n' +
+      'Isha Volunteers\n' +
+      '[[Sudipta Halder | 2026-09-18 15:10:06 +05:30]]: - 📱*Please share it as your WhatsApp status* 🙏🙏 🙏 \n' +
+      '\n' +
+      '- 🏬 *_And also share it in your housing complex whatsapp group_* 🙏🙏🙏'
+  },
+  {
+    chatId: '120363421429978969@g.us',
+    chatName: 'DUMDUM in-person(offline) volunteering',
+    transcript: '[[Sudipta Halder | 2026-09-18 15:11:46 +05:30]]: *Namaskaram* 🙏\n' +
+      'We are glad to announce \n' +
+      '🌈 *4 Days Inner Engineering in-person Program in English at Uniworld City, Newtown*\n' +
+      '\n' +
+      '🔖 *Registration Link :*  \n' +
+      'https://Isha.co/ekolkata-ie\n' +
+      '\n' +
+      '☎️ *Enquiry :-* 8300053777 / 8300053222\n' +
+      '\n' +
+      ' *Venue* : _*Uniclub 1, Ground Floor, Uniworld City, Newtown AA 3, Kolkata - 700156*_\n' +
+      ' 📍https://maps.app.goo.gl/8Evbpx2uS8aWkP4TA\n' +
+      '\n' +
+      "- *Participants' Experience:*\thttps://share.iec.ishayoga.eu/Yk7tIj\n" +
+      '\n' +
+      '- *Program Benefits:* \thttps://isha.sadhguru.org/yoga/yoga-articles-meditation/benefits-meditation-shambhavi-mahamudra-sadhguru/\n' +
+      '\n' +
+      '- *Harvard & Rutgers University Research:* \thttps://share.google/a2isZVmyQz1TiBfy4\n' +
+      '\n' +
+      '✨ You can share this wonderful opportunity with your friends and family \n' +
+      '\n' +
+      '*In Love, Light & Laughter*\n' +
+      'Isha Volunteers\n' +
+      '[[Sudipta Halder | 2026-09-18 15:11:52 +05:30]]: - 📱*Please share it as your WhatsApp status* 🙏🙏 🙏 \n' +
+      '\n' +
+      '- 🏬 *_And also share it in your housing complex whatsapp group_* 🙏🙏🙏\n' +
+      '[[Sudipta Halder | 2026-09-18 15:12:00 +05:30]]: (message)\n' +
+      '[[Sudipta Halder | 2026-09-18 15:12:07 +05:30]]: (message)'
+  },
+  {
+    chatId: '919147720604@s.whatsapp.net',
+    chatName: 'Spencers Hypermarket',
+    transcript: '[[Spencers Hypermarket | 2026-09-18 16:30:10 +05:30]]: 🌺 ✨ *Pujo Jombe Spencers er songe* ✨\n' +
+      'Shop & save this weekend at Spencers during the Agomoni month! 🔱 !\n' +
+      '\n' +
+      '🎉 *Pujo Specials Deals from Your Favourites!*\n' +
+      '💫 Aashirvaad Atta whole wheat 5kg @Rs.229 + 1kg Aashirvaad Salt Free MRP: ~Rs.278~\n' +
+      '💫 Doctor Choice Mustard Oil Pouch 1L @Rs.191 MRP: ~Rs.210~\n' +
+      '💫 Gobindo Bhog Rice regular loose @Rs.169/kg MRP: ~Rs.294~\n' +
+      '\n' +
+      '🎁 *My Spencers Rewards Members get these special prices*!\n' +
+      'Not a member? *Join now & unlock these offers* + save upto 6% extra!\n' +
+      '\n' +
+      '⏰ Valid till Sunday!\n' +
+      '\n' +
+      '📍 Visit your nearest Spencers store\n' +
+      '📲 Jiffy App: http://1kx.in/R0Uxbz | 📞 1800-123-6868\n' +
+      '\n' +
+      'T&C!\n' +
+      '[Type "STOP" to opt out!]'
+  }
+]
+:::::::: chats after processing by gemma && filterKeepItems (removed junk and sensitive) :::::::::::::
+[
+  {
+    chatId: '120363410794941881@g.us',
+    chatName: 'In-House Influencers Batch 16',
+    gemmaDecision: 'keep',
+    gemmaSummary: "The chat is from the 'In-House Influencers Batch 16' group and involves greetings, reactions, and logistical discussions regarding the group. Aastha Jha asked if a laptop was compulsory for the activity, and the group is waiting for more volunteers. Sudha (KL) Naturally mentioned that details would be shared during and after the Sunday session. A discussion occurred regarding the IHI Team members (like PRUTHVI) thinking about creating new email and IG accounts, and the group confirmed they would provide details later."
+  },
+  {
+    chatId: '120363248684532461@newsletter',
+    chatName: 'This is Last Time SG',
+    gemmaDecision: 'keep',
+    gemmaSummary: 'The conversation discusses the reason for rapid breathing in certain asanas like Bhujangasana, Sarvangasana, and Matsyasana. Sadhguru explains that rapid breathing is an effort to transform a physical process into an energy process. He emphasizes that kriyas must be done with care, warning that if energies are activated without proper preparation (wrong posture, attitude, or situation), a positive outcome can turn into a disaster, using the analogy of a pot of gold falling on the head instead of being caught. Therefore, only certain postures are safe to transform into kriyas.'
+  },
+  {
+    chatId: '120363183420261859@newsletter',
+    chatName: 'Sadhguru',
+    gemmaDecision: 'keep',
+    gemmaSummary: 'Sadhguru sent an image on 2026-09-18 09:33:57 +05:30.'
+  },
+  {
+    chatId: '120363318576347090@g.us',
+    chatName: 'BCA 2024 Section A',
+    gemmaDecision: 'keep',
+    gemmaSummary: 'Rupam Bhattacharya sent a document and requested attendees of the Seva First Innovation Challenge on September 19th, 2026, to fill out a Google form for security check and confirmation of presence. The link provided is https://forms.gle/QCrL958oF165CMck8.'
+  },
+  {
+    chatId: '120363315497765875@g.us',
+    chatName: 'Sharanam Smaranam Volunteers 🌸',
+    gemmaDecision: 'keep',
+    gemmaSummary: "Parth Deshmukh recommended watching 'Kriya Through Sound on Sadhguru Exclusive' (link: https://sgapp.sng.link/Acxyc/cykj/r_5efec5c55a) for a profound inner transformation and liberation, suggesting it offers a deeper understanding of Indian Classical Music and Sound as a kriya. Ankur Rastogi reacted positively to this suggestion."
+  },
+  {
+    chatId: '120363337456364299@g.us',
+    chatName: 'Sharanam Smaranam B2 🌸',
+    gemmaDecision: 'keep',
+    gemmaSummary: "Parth Deshmukh suggested watching 'Kriya Through Sound on Sadhguru Exclusive' (link: https://sgapp.sng.link/Acxyc/cykj/r_5efec5c55a) as a means for profound inner transformation and liberation, noting it provides a deeper understanding of Indian Classical Music and Sound as a kriya."
+  },
+  {
+    chatId: '120363313805903097@g.us',
+    chatName: 'Ahona',
+    gemmaDecision: 'keep',
+    gemmaSummary: 'An announcement was made regarding a 4 Days Inner Engineering in-person Program in English at Uniworld City, Newtown. Registration link, enquiry numbers, venue details, participant experience link, program benefits link, and Harvard & Rutgers University research link were provided. The message encouraged sharing the opportunity. Several individuals (Nishant Kumar Agarwal, Debashish Paul, Shubhodip Chakravarty, N.R VENKATESWARAN, Arun Kumar Dubey, Akash Mondal, and Ruchira Banerjee) expressed interest in volunteering or joining a WhatsApp Community.'
+  },
+  {
+    chatId: '919831192151@s.whatsapp.net',
+    chatName: 'Papa',
+    gemmaDecision: 'keep',
+    gemmaSummary: 'The user sent three images in the chat on 2026-09-18 at 12:51:07 +05:30, 12:51:16 +05:30, and 12:51:31 +05:30.'
+  },
+  {
+    chatId: '120363296757086815@g.us',
+    chatName: 'IEM BCA SEC A',
+    gemmaDecision: 'keep',
+    gemmaSummary: 'The group discussed that Cloud assignment 3 must be submitted in Google Classroom by tomorrow, regardless of signatures, as the sir will mark it in the lab. A discussion followed regarding an extension. It was confirmed that the sir had extended the deadline. It was agreed that work should start today and be completed by tomorrow.'
+  },
+  {
+    chatId: '120363163190633248@g.us',
+    chatName: '🌞Isha West Bengal #2🌙',
+    gemmaDecision: 'keep',
+    gemmaSummary: 'Anjali Rao shared information about upcoming sessions: \n' +
+      '\n' +
+      '1. **Shambhavi Mahamudra Kriya Deep Dive:** Scheduled for Sunday, 20 September at 11:30 AM (approx. 90 mins). Join link: isha.co/smk-login. Empty stomach is not required.\n' +
+      '2. **Shambhavi Mahamudra Kriya Refresher session:** Available on 27 September for those wishing to restart their practice.'
+  },
+  {
+    chatId: '120363333621519995@g.us',
+    chatName: 'Mumbai City 🏙️',
+    gemmaDecision: 'keep',
+    gemmaSummary: 'Pratyush shared a YouTube link. The conversation then focused on a discussion regarding the cost of a box. Devendra mentioned that a credit card was used to buy an expensive box, while Pratyush stated he does not use credit cards. Devendra also mentioned that the card is linked to three banks.'
+  },
+  {
+    chatId: '120363190669312595@g.us',
+    chatName: '🌄  KOLKATA EAST All Volunteers 🌄',
+    gemmaDecision: 'keep',
+    gemmaSummary: "Announcement for a 4 Days Inner Engineering in-person Program in English at Uniworld City, Newtown. Registration link is https://Isha.co/ekolkata-ie. Enquiry numbers are 8300053777 / 8300053222. Venue is Uniclub 1, Ground Floor, Uniworld City, Newtown AA 3, Kolkata - 700156 (Map link: https://maps.app.goo.gl/8Evbpx2uS8aWkP4TA). Links for Participants' Experience, Program Benefits, and Harvard & Rutgers University Research are also provided. The message encourages sharing this opportunity with friends and family via WhatsApp status and housing complex groups."
+  },
+  {
+    chatId: '120363421429978969@g.us',
+    chatName: 'DUMDUM in-person(offline) volunteering',
+    gemmaDecision: 'keep',
+    gemmaSummary: 'Sudipta Halder announced a 4 Days Inner Engineering in-person Program in English at Uniworld City, Newtown. Details provided include:\n' +
+      '\n' +
+      '*   **Registration Link:** https://Isha.co/ekolkata-ie\n' +
+      '*   **Enquiry Contacts:** 8300053777 / 8300053222\n' +
+      '*   **Venue:** Uniclub 1, Ground Floor, Uniworld City, Newtown AA 3, Kolkata - 700156 (Map link: https://maps.app.goo.gl/8Evbpx2uS8aWkP4TA)\n' +
+      '*   **Additional Links:**\n' +
+      "    *   Participants' Experience: https://share.iec.ishayoga.eu/Yk7tIj\n" +
+      '    *   Program Benefits: https://isha.sadhguru.org/yoga/yoga-articles-meditation/benefits-meditation-shambhavi-mahamudra-sadhguru/\n' +
+      '    *   Harvard & Rutgers University Research: https://share.google/a2isZVmyQz1TiBfy4\n' +
+      '\n' +
+      'Sudipta Halder requested that this opportunity be shared on WhatsApp status and in housing complex WhatsApp groups.'
+  },
+  {
+    chatId: '919147720604@s.whatsapp.net',
+    chatName: 'Spencers Hypermarket',
+    gemmaDecision: 'keep',
+    gemmaSummary: 'Spencers Hypermarket is offering Pujo Specials deals during the Agomoni month. Deals are valid until Sunday. Featured offers include:\n' +
+      '*   Aashirvaad Atta whole wheat 5kg + 1kg Aashirvaad Salt Free: Rs.229 + ~Rs.278\n' +
+      '*   Doctor Choice Mustard Oil Pouch 1L: Rs.191 + ~Rs.210\n' +
+      '*   Gobindo Bhog Rice regular loose: Rs.169/kg + ~Rs.294\n' +
+      '\n' +
+      'Rewards Members get these prices and can save up to 6% extra by joining. Customers can visit the nearest store. Contact details provided are: Jiffy App: http://1kx.in/R0Uxbz | Phone: 1800-123-6868.'
+  }
+]
+::::::: strands agent result with updated memory and cards :::::::::
+{
+  updatedMemory: '## Education\n' +
+    '- Currently enrolled in BCA (Bachelor of Computer Applications) 2024, Section A at IEM\n' +
+    '\n' +
+    '## Professional/Volunteer Activities\n' +
+    '- Involved with Isha Foundation volunteering groups in Kolkata\n' +
+    '  - Member of "Sharanam Smaranam Volunteers" group\n' +
+    '  - Member of "Kolkata East All Volunteers" group\n' +
+    '  - Member of "Dumdum in-person volunteering" group\n' +
+    '- Part of an "In-House Influencers" program (Batch 16)\n' +
+    '\n' +
+    '## Personal\n' +
+    '- Family: Has contact saved as "Papa"\n' +
+    '\n' +
+    '## Interests\n' +
+    '- Appears interested in yoga/spiritual practices (Shambhavi Mahamudra Kriya, Inner Engineering programs)',
+  cards: [
+    {
+      title: 'Cloud Assignment 3 Due',
+      body: 'Cloud assignment 3 must be submitted in Google Classroom. The deadline was extended by the instructor. Complete it by tomorrow (2026-09-19).',
+      priority: 'high'
+    },
+    {
+      title: 'Seva First Innovation Challenge - September 19, 2026',
+      body: 'Event on September 19th, 2026. Fill out the security and attendance confirmation form at: https://forms.gle/QCrL958oF165CMck8\n' +
+        '\n' +
+        'Shared by Rupam Bhattacharya in BCA 2024 Section A group.',
+      priority: 'medium'
+    },
+    {
+      title: 'Shambhavi Mahamudra Kriya Deep Dive - September 20',
+      body: 'Sunday, September 20, 2026 at 11:30 AM (approx. 90 mins).\n' +
+        'Join link: isha.co/smk-login\n' +
+        'Note: Empty stomach not required.\n' +
+        '\n' +
+        'Organized by Isha West Bengal.',
+      priority: 'medium'
+    },
+    {
+      title: 'Shambhavi Mahamudra Kriya Refresher',
+      body: 'Available on September 27, 2026 for those wishing to restart their practice.\n' +
+        '\n' +
+        'Organized by Isha West Bengal.',
+      priority: 'low'
+    },
+    {
+      title: 'Inner Engineering Program - Uniworld City, Newtown',
+      body: '4 Days Inner Engineering in-person Program in English at Uniclub 1, Ground Floor, Uniworld City, Newtown AA 3, Kolkata - 700156.\n' +
+        '\n' +
+        'Registration: https://Isha.co/ekolkata-ie\n' +
+        'Enquiry: 8300053777 / 8300053222\n' +
+        '\n' +
+        'Being promoted across multiple Isha volunteer groups.',
+      priority: 'low'
+    }
+  ]
+}
+
+sentientos main  ? ❯ 

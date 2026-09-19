@@ -1,3 +1,5 @@
 model/system_prompt.ts
 test.ts
 node_modules/
+.env
+.env.local
