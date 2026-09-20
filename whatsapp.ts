@@ -103,7 +103,7 @@ function formatChats(messages: NormalizedWhatsappMessage[]): FormattedWhatsappCh
     })
 }
 
-export function getWhatsappCycle(state: WhatsappState, since?: Date): WhatsappCycleBatch {
+export function getWhatsappCycle(state: WhatsappState): WhatsappCycleBatch {
     const dbPath = path.join(os.homedir(), ".local", "state", "wacli", "wacli.db")
     const db = new Database(dbPath, { readonly: true })
 
@@ -116,10 +116,10 @@ export function getWhatsappCycle(state: WhatsappState, since?: Date): WhatsappCy
         let messageRows: WhatsappMessageRow[] = []
 
         if (cycleUpperBoundRowId !== null) {
-            if (since || !state.initialized) {
+            if (!state.initialized) {
                 const midnightToday = new Date()
                 midnightToday.setHours(0, 0, 0, 0)
-                const sinceUnixTime = Math.floor((since ?? midnightToday).getTime() / 1000)
+                const midnightUnixTime = Math.floor(midnightToday.getTime() / 1000)
 
                 messageRows = db.prepare(`
                     SELECT rowid, chat_jid, chat_name, sender_jid, sender_name, ts, from_me, text, display_text
@@ -128,7 +128,7 @@ export function getWhatsappCycle(state: WhatsappState, since?: Date): WhatsappCy
                     AND rowid <= ?
                     AND deleted_at IS NULL
                     ORDER BY ts ASC, rowid ASC
-                `).all(sinceUnixTime, cycleUpperBoundRowId) as WhatsappMessageRow[]
+                `).all(midnightUnixTime, cycleUpperBoundRowId) as WhatsappMessageRow[]
             } else {
                 const previousProcessedRowId = state.lastProcessedRowId ?? 0
 

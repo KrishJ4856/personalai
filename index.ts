@@ -40,10 +40,7 @@ async function main() {
 
     const state = loadState()
 
-    // Temporary demo override: replay today's messages from 5 pm, ignoring the checkpoint.
-    const demoStart = new Date()
-    demoStart.setHours(17, 0, 0, 0)
-    const { cycleUpperBoundRowId, chats } = getWhatsappCycle(state.whatsapp, demoStart)
+    const { cycleUpperBoundRowId, chats } = getWhatsappCycle(state.whatsapp)
 
     const retrievedAt = new Date().toISOString()
 
