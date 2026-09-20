@@ -8,7 +8,7 @@ import {
     loadCards,
     loadMemory,
     saveMemory
-} from "./state.js"
+} from "./state.ts"
 
 const getCurrentDateTime = tool({
     name: "get_current_date_time",

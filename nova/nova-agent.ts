@@ -1,8 +1,8 @@
-import "dotenv/config"
+import "./env.ts"
 import { Agent } from "@strands-agents/sdk"
 import { OpenAIModel } from "@strands-agents/sdk/models/openai"
-import { novaAct } from "./nova.js"
-import { getCurrentDateTime, listCards, addCard, removeCard, showMemory, modifyMemory } from "../tools.js"
+import { novaAct } from "./nova.ts"
+import { getCurrentDateTime, listCards, addCard, removeCard, showMemory, modifyMemory } from "../tools.ts"
 
 const model = new OpenAIModel({
     api: "chat",
@@ -79,7 +79,7 @@ export async function askSentient(message: string){
 }
 
 // const reply = await askSentient(`
-//     open gmail. send an email from my primary email to my secondary email with a simple "hii" message
+//     tell me this are you really capable of opening a website and then copying some text present on the website???
 // `)
 
 // console.log(reply)

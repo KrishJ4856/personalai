@@ -85,7 +85,6 @@ export function BriefingFeed({
           ) : null}
         </section>
 
-        {/* Ask Sentient is intentionally parked until the conversation backend is ready. */}
         <footer className="briefing-footer">Private by design · Files stay local</footer>
       </div>
     </main>

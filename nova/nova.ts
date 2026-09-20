@@ -1,4 +1,4 @@
-import "dotenv/config"
+import "./env.ts"
 import { McpClient } from "@strands-agents/sdk"
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js"
 

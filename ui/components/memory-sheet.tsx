@@ -38,8 +38,7 @@ async function responseError(response: Response, fallback: string) {
   }
 }
 
-export function MemorySheet() {
-  const [open, setOpen] = useState(false);
+export function MemorySheet({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
   const [editing, setEditing] = useState(false);
   const [saving, setSaving] = useState(false);
   const [draft, setDraft] = useState("");
@@ -84,14 +83,10 @@ export function MemorySheet() {
   }, []);
 
   function handleOpenChange(nextOpen: boolean) {
-    setOpen(nextOpen);
+    onOpenChange(nextOpen);
 
-    if (!nextOpen) {
-      setEditing(false);
-      if (memory.status === "ready") setDraft(memory.markdown);
-    }
-
-    if (nextOpen && (memory.status === "idle" || memory.status === "error")) {
+    // Re-read tool changes on opening; an unsaved editor retains its ETag/draft.
+    if (nextOpen && !editing) {
       void loadMemory();
     }
   }

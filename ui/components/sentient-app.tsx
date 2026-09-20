@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { toast } from "sonner";
 
 import { Brand } from "@/components/brand";
+import { AskAiSheet } from "@/components/ask-ai-sheet";
 import { BriefingFeed } from "@/components/briefing-feed";
 import { BriefingIntro } from "@/components/briefing-intro";
 import { MemorySheet } from "@/components/memory-sheet";
@@ -49,6 +50,8 @@ export function SentientApp({
   const [cards, setCards] = useState(initialCards);
   const [loadError, setLoadError] = useState(initialLoadError);
   const [status, setStatus] = useState(initialStatus);
+  const [activeSheet, setActiveSheet] = useState<"memory" | "chat" | null>(null);
+  const cardsRefreshSequence = useRef(0);
 
   async function refreshStatus() {
     try {
@@ -61,13 +64,14 @@ export function SentientApp({
   }
 
   async function refreshCards() {
+    const sequence = ++cardsRefreshSequence.current;
     try {
       const response = await fetch("/api/cards", { cache: "no-store" });
-      const result: unknown = await response.json();
 
       if (!response.ok) {
         throw new Error(await apiError(response, "Today’s briefing could not be refreshed."));
       }
+      const result: unknown = await response.json();
 
       if (!result || typeof result !== "object" || !("cards" in result)) {
         throw new Error("The local cards response was not valid.");
@@ -81,10 +85,12 @@ export function SentientApp({
           ? (result as { warning: string }).warning
           : null;
 
+      if (sequence !== cardsRefreshSequence.current) return;
       setCards(parsed.data);
       setLoadError(warning);
       await refreshStatus();
     } catch (error) {
+      if (sequence !== cardsRefreshSequence.current) return;
       setLoadError(
         error instanceof Error ? error.message : "Today’s briefing could not be refreshed.",
       );
@@ -127,7 +133,8 @@ export function SentientApp({
         {stage === "feed" ? (
           <div className="app-header__actions">
             <StatusIndicator status={status} />
-            <MemorySheet />
+            <MemorySheet open={activeSheet === "memory"} onOpenChange={(open) => setActiveSheet(open ? "memory" : null)} />
+            <AskAiSheet open={activeSheet === "chat"} onOpenChange={(open) => setActiveSheet(open ? "chat" : null)} onStateChange={() => void refreshCards()} />
           </div>
         ) : null}
       </header>

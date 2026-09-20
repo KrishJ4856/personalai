@@ -33,8 +33,9 @@ function SheetOverlay({
 function SheetContent({
   className,
   children,
+  closeLabel = "Close memory",
   ...props
-}: React.ComponentProps<typeof SheetPrimitive.Content>) {
+}: React.ComponentProps<typeof SheetPrimitive.Content> & { closeLabel?: string }) {
   return (
     <SheetPortal>
       <SheetOverlay />
@@ -49,7 +50,7 @@ function SheetContent({
         {children}
         <SheetPrimitive.Close className="absolute right-5 top-5 grid size-10 place-items-center rounded-full text-[var(--ink-soft)] transition-colors hover:bg-[var(--paper-deep)] hover:text-[var(--ink)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus)]">
           <X className="size-4" />
-          <span className="sr-only">Close memory</span>
+          <span className="sr-only">{closeLabel}</span>
         </SheetPrimitive.Close>
       </SheetPrimitive.Content>
     </SheetPortal>
