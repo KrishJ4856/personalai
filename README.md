@@ -1,8 +1,8 @@
-# SentientOS
+# Personal AI - SentientOS but for Omarchy Linux
 
 > A privacy-first, proactive personal AI assistant for Linux that can **perceive, think and act**.
 
-SentientOS started as a 3-day hackathon experiment: what if a personal AI did not just sit inside a chat box waiting for prompts, but could quietly understand what is happening on your computer, remember useful context, proactively surface things that matter, and then actually act on your behalf?
+This project started as a 3-day hackathon experiment: what if a personal AI did not just sit inside a chat box waiting for prompts, but could quietly understand what is happening on your computer, remember useful context, proactively surface things that matter, and then actually act on your behalf?
 
 The current prototype uses WhatsApp as its main perception source, a small local Gemma model as a privacy/compression layer, AWS Strands + Amazon Bedrock for the higher-level intelligence layer, and Amazon Nova Act for browser actions.
 
@@ -176,7 +176,7 @@ Install these before running the project:
 - `uv` / `uvx`
 - Google Chrome or Chromium
 - a user-level `systemd` session
-- an Amazon Bedrock API key
+- an Amazon Bedrock API key (for the Bedrock Mantle endpoint)
 - an Amazon Nova Act API key
 
 ### Local AI
@@ -276,7 +276,7 @@ You can manually verify authentication using:
 wacli auth status --read-only --json
 ```
 
-After authentication, SentientOS creates a persistent user-level systemd service:
+After authentication, It creates a persistent user-level systemd service:
 
 ```text
 ~/.config/systemd/user/wacli-sync.service
@@ -472,39 +472,7 @@ If you use another tiling window manager, create an equivalent rule or otherwise
 
 ---
 
-# Important: remove the temporary demo replay override
-
-The current `index.ts` in the repository contains a temporary hackathon demo override that replays WhatsApp messages starting from **5:00 PM of the current day**:
-
-```ts
-const demoStart = new Date()
-demoStart.setHours(17, 0, 0, 0)
-
-const { cycleUpperBoundRowId, chats } =
-    getWhatsappCycle(state.whatsapp, demoStart)
-```
-
-For normal incremental operation, replace it with:
-
-```ts
-const { cycleUpperBoundRowId, chats } =
-    getWhatsappCycle(state.whatsapp)
-```
-
-This restores the intended behavior:
-
-- first run: process messages from local midnight
-- later runs: process only messages after `lastProcessedRowId`
-
-The checkpoint is stored in:
-
-```text
-~/.local/share/sentientos/state.json
-```
-
----
-
-# Running SentientOS
+# Running this project
 
 ## Full pipeline
 
@@ -557,7 +525,7 @@ npm run ui:build
 
 # Local state
 
-SentientOS intentionally stores its state outside the repository:
+This project being inspired by SentientOS, intentionally stores its state outside the repository:
 
 ```text
 ~/.local/share/sentientos/
