@@ -6,6 +6,8 @@ import { setup } from "./setup.js"
 import { loadState, saveState, saveWhatsappCycle } from "./state.js"
 import { getWhatsappCycle } from "./whatsapp.js"
 import { runIntelligenceCycle } from "./intelligence.js"
+import { spawn } from "node:child_process"
+import { setupWacli } from "./wacli.js"
 
 const LocalTriageSchema = z.object({
     decision: z.enum(["keep", "junk", "sensitive"]),
@@ -34,15 +36,11 @@ async function askGemma(messages: Message[]) {
 
 async function main() {
     await setup()
+    setupWacli()
 
     const state = loadState()
 
-    // const { cycleUpperBoundRowId, chats } = getWhatsappCycle(state.whatsapp)
-    const { cycleUpperBoundRowId, chats } = getWhatsappCycle({
-        initialized: false,
-        lastProcessedRowId: null,
-        lastProcessedAt: null
-    })
+    const { cycleUpperBoundRowId, chats } = getWhatsappCycle(state.whatsapp)
 
     const retrievedAt = new Date().toISOString()
 
@@ -53,7 +51,7 @@ async function main() {
     const systemPrompt = {
         role: "system",
         content:
-        `You will be provided with one WhatsApp chat. 
+            `You will be provided with one WhatsApp chat. 
         
         The chat contains: 
         - chatId
@@ -104,7 +102,7 @@ async function main() {
 
         const messages = [
             systemPrompt,
-            { 
+            {
                 role: "user",
                 content: `
                     Chat ID: ${chat.chatId},
@@ -158,6 +156,17 @@ async function main() {
 
     // Run intelligence cycle
     await runIntelligenceCycle()
+
+    // start dev server for next web ui
+    console.log("\nStarting SentientOS UI...\n")
+
+    const ui = spawn("npm", ["run", "ui"], {
+        stdio: "inherit"
+    })
+
+    ui.on("error", (error) => {
+        console.error("Failed to start UI:", error)
+    })
 }
 
 main().catch((error) => {

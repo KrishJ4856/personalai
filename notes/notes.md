@@ -1,4 +1,4 @@
-Understanding fns
+Notes: Understanding fns
 
 setup():
 - checks and installs ollama if not installed

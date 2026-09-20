@@ -12,6 +12,8 @@ export const cardsDirectory = path.join(appDataDirectory, "cards")
 export const cardsFilePath = path.join(cardsDirectory, "latest.json")
 
 export interface Card {
+    id: string
+    createdAt: string
     title: string
     body: string
     priority: "low" | "medium" | "high"

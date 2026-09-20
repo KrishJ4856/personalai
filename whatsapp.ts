@@ -117,8 +117,8 @@ export function getWhatsappCycle(state: WhatsappState): WhatsappCycleBatch {
 
         if (cycleUpperBoundRowId !== null) {
             if (!state.initialized) {
-                const midnightToday = new Date("2026-09-18T00:00:00+05:30")
-                // midnightToday.setHours(0, 0, 0, 0)
+                const midnightToday = new Date()
+                midnightToday.setHours(0, 0, 0, 0)
                 const midnightUnixTime = Math.floor(midnightToday.getTime() / 1000)
 
                 messageRows = db.prepare(`

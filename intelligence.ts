@@ -4,6 +4,7 @@ import { OpenAIModel } from "@strands-agents/sdk/models/openai"
 import { getLatestWhatsappCycle, loadMemory, saveMemory, appendCards } from "./state.js"
 import { filterKeepItems } from "./processed.js"
 import { z } from "zod"
+import { randomUUID } from "crypto"
 
 const outputSchema = z.object({
     updatedMemory: z.string().nullable(),
@@ -203,8 +204,17 @@ export async function runIntelligenceCycle() {
     // replacing memory.md completely
     saveMemory(intelligence.updatedMemory ?? currentMemory)
 
+    const cards = intelligence.cards.map((card) => {
+        return {
+            id: randomUUID(),
+            createdAt: new Date().toISOString(),
+            title: card.title,
+            body: card.body,
+            priority: card.priority
+        }
+    })
     // cards from this cycle are appended
-    appendCards(intelligence.cards)
+    appendCards(cards)
 
     console.log("\nFrontier intelligence cycle complete.")
 }
