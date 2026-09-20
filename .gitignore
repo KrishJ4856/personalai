@@ -1,9 +1,0 @@
-model/
-test.ts
-node_modules/
-ui/.next/
-ui/out/
-ui/*.tsbuildinfo
-.env
-.env.local
-notes/
